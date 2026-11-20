@@ -18,13 +18,11 @@ Route: Separate sessions with manual coordination (two builder agents run one at
 
 ## Compare with my predictions
 
-Run `python app.py` after adding S6. Compare with the predictions you wrote in POLICY.md before implementation.
-
 | Scenario | Expected selection | Actual selection and reason | Matches my policy? |
 |---|---|---|---|
-| S1 | A | A | A — Elevator A is passing floor 5 going down | Yes |
-| S3 | A | A | A — Elevator A already has floor 5 in its stops | Yes |
-| S6 | B | B | B — Idle elevator B is closest to floor 5 (distance 1) | Yes |
+| S1 | A | A  — Elevator A is passing floor 5 going down | Yes |
+| S3 | A | A  — Elevator A already has floor 5 in its stops | Yes |
+| S6 | B | B  — Idle elevator B is closest to floor 5 (distance 1) | Yes |
 
 - Supplied suite command and actual result: py -m unittest -v → 6 out of 6 tests passed
 - One review finding or concern I checked: The reviewer said that Priority 2 can send a far elevator instead of a close idle one. I checked my POLICY.md and it says to always prefer a passing elevator over an idle one, with no distance limit. This is not a code mistake. It is a gap in my written policy. I accept it because my main goal is to avoid extra elevator travel, not to reduce the caller's waiting time.

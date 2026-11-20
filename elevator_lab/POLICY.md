@@ -4,10 +4,12 @@ Fill in this template yourself before asking the builders to implement it. Short
 
 ## Priorities
 
-- What I prioritise: [whose experience or which resource matters most]
-- My exact selection rule: [ordered rules or a defined cost formula, applied after eligibility]
-- My deterministic tie-breaker: [what happens if candidates remain equal]
-- A tradeoff I accept: [who may receive worse service, or what may cost more]
+- What I prioritise: I want to reduce unnecessary elevator movement. I prefer to send an elevator that is already moving toward the caller, so it does not need to travel extra distance. I accept that passengers inside that elevator may have one more stop, because this is better than moving a second elevator from far away.
+- My exact selection rule: Already has a stop at the caller’s floor If an eligible moving elevator already has the caller’s floor in its stops list, choose it. It does not need any extra stop or extra travel. This is the best choice.
+Passing car If no elevator already has that stop, check if an eligible moving elevator is going in the same direction and will pass the caller’s floor. If yes, prefer it over any idle elevator. It needs one extra stop but no extra travel.
+Nearest idle elevator If no moving elevator qualifies, choose the idle elevator that is closest to the caller’s floor. Use abs(elevator.floor request.floor) to measure distance. This keeps repositioning travel short.
+- My deterministic tie-breaker: If two elevators have the same priority and the same distance, choose the one with the lower letter ID (A before B).
+- A tradeoff I accept: People already riding a passing elevator may have to stop one extra time for the new caller. I accept this because sending an idle elevator would use more total movement. I do not claim this saves energy or reduces waiting time exactly it is only a movement-based estimate.
 
 ## Predictions before implementation
 
@@ -21,7 +23,7 @@ Use S1, one of S2/S3, and one valid scenario you create in scenarios.py. For you
 
 ## Another defensible policy
 
-- An alternative priority: [briefly describe it]
-- A scenario where it could choose differently, and why: [use or adapt a case]
+- An alternative priority: “Nearest elevator first.” Choose the eligible elevator that is currently closest to the caller’s floor, whether it is moving or idle.
+- A scenario where it could choose differently, and why: In S1, elevator A is at floor 8 (3 floors above the caller at floor 5), and elevator B is at floor 4 (1 floor below). The nearest-first policy picks B because the distance is smaller (1 < 3). My Route-First policy picks A because A is already moving down toward floor 5 and needs no extra travel. The two policies give different answers here because floor distance alone does not show whether an elevator is already heading toward the caller.
 
 If your predicted choices contradict your general rule, resolve that before implementation. If review later changes your mind, note the revision in EVIDENCE.md and update the policy and code together.

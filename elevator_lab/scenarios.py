@@ -22,4 +22,8 @@ SCENARIOS = [
         Elevator("A", 6, "up", 130, (8,)),
         Elevator("B", 4, "down", 520, (1,)),
     ), Request(5, "down")),
+    Scenario("S6 Two idle elevators unequal distance", (
+        Elevator("A", 2, "idle", 0),
+        Elevator("B", 6, "idle", 0),
+    ), Request(5, "down")),
 ]

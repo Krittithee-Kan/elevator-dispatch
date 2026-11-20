@@ -15,9 +15,9 @@ Use S1, one of S2/S3, and one valid scenario you create in scenarios.py. For you
 
 | Scenario | My expected selection | Why it follows my policy | Benefit and cost / who is affected |
 |---|---|---|---|
-| S1 | [A/B] | [reason] | [tradeoff] |
-| S2 or S3 | [A/B] | [reason] | [tradeoff] |
-| S6: my scenario | [A/B/WAIT] | [reason] | [tradeoff] |
+| S1 | A | A is a passing car (floor 8 moving down, floor 5 is on its path to floor 1). Priority 2 beats priority 3 (idle B). | Benefit: A adds no extra travel. Cost: existing ~2 passengers aboard A gain one more stop. |
+| S3 | A | A already has floor 5 in its scheduled stops `(5, 1)`. Priority 1 — zero extra stops. | Benefit: no extra stop or travel whatsoever. Cost: none above what was already planned. |
+| S6: Two idle elevators at unequal distances | B | A is idle at floor 2 (3 floors from caller at floor 5); B is idle at floor 6 (1 floor from caller). Both hit priority 3; B wins on distance sub-score. | Benefit: B travels less to reach the caller. Cost: A is left idle; if another call arrives on floors 1–3, response may be slower. |
 
 ## Another defensible policy
 
